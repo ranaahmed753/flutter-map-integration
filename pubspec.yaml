@@ -1,0 +1,32 @@
+name: map
+description: "A flutter app built for google map integration"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  google_maps_flutter: ^2.14.0
+  flutter_polyline_points: ^3.1.0
+  flutter_dotenv: ^6.0.0
+  custom_info_window: ^1.0.1
+  geolocator: ^14.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/icons/
+    - .env
