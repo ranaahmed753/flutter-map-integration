@@ -20,6 +20,8 @@ android {
     }
 
     defaultConfig {
+        manifestPlaceholders["GOOGLE_MAPS_API_KEY"] =
+                project.findProperty("google.maps.api.key")?.toString() ?: ""
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.map.integration.map"
         // You can update the following values to match your application needs.
