@@ -3,9 +3,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:map/core/constants/image_path.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:map/core/services/location_service.dart';
 
 class RiderTrackingMapScreen extends StatefulWidget {
   const RiderTrackingMapScreen({super.key});
@@ -37,6 +39,7 @@ class _RiderTrackingMapScreenState extends State<RiderTrackingMapScreen> {
 
   BitmapDescriptor riderIcon = BitmapDescriptor.defaultMarker;
   BitmapDescriptor userIcon = BitmapDescriptor.defaultMarker;
+  BitmapDescriptor currentLocationIcon = BitmapDescriptor.defaultMarker;
 
   @override
   void initState() {
@@ -59,6 +62,10 @@ class _RiderTrackingMapScreenState extends State<RiderTrackingMapScreen> {
     userIcon = await BitmapDescriptor.asset(
       const ImageConfiguration(size: Size(48, 48)),
       ImagePath.userIcon,
+    );
+    currentLocationIcon = await BitmapDescriptor.asset(
+      const ImageConfiguration(size: Size(48, 48)),
+      ImagePath.currentLocationIcon,
     );
   }
 
@@ -235,6 +242,31 @@ class _RiderTrackingMapScreenState extends State<RiderTrackingMapScreen> {
     }
   }
 
+  navigateToCurrentLocation() async {
+    Position? position = await LocationService.instance.getCurrentLocation();
+    if (position == null) {
+      return;
+    }
+
+    _mapController?.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: LatLng(position.latitude, position.longitude),
+          zoom: 15,
+        ),
+      ),
+    );
+
+    _markers.add(
+      Marker(
+        markerId: const MarkerId("My location marker"),
+        position: LatLng(position.latitude, position.longitude),
+        icon: currentLocationIcon,
+      ),
+    );
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -280,6 +312,12 @@ class _RiderTrackingMapScreenState extends State<RiderTrackingMapScreen> {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        elevation: 10,
+        backgroundColor: Colors.white,
+        child: const Icon(Icons.my_location, size: 30),
+        onPressed: navigateToCurrentLocation,
       ),
     );
   }

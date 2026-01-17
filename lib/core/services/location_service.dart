@@ -11,7 +11,7 @@ class LocationService {
 
   LocationService._();
 
-  static Future<Position?> getCurrentLocation() async {
+  Future<Position?> getCurrentLocation() async {
     // Check if location services are enabled
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
