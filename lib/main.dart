@@ -1,27 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:map/screens/restaurant_map_screen.dart';
-import 'package:map/screens/rider_tracking_map_screen.dart';
+import 'package:map/core/services/map_service.dart';
+import 'package:map/root_app.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
 
-void main() async{
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => MapService.instance..setupMap()),
+      ],
+      child: const RootApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
-     // home: RiderTrackingMapScreen(),
-    home: RiderTrackingMapScreen(),
-    );
-  }
-}
 
