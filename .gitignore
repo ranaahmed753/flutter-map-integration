@@ -46,3 +46,5 @@ app.*.map.json
 
 #Dot ENV
 .env
+
+ios/Flutter/Config.xcconfig
