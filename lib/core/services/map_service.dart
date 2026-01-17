@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:math';
 import 'dart:ui';
@@ -158,7 +157,7 @@ class MapService extends ChangeNotifier {
 
   // 🧪 Mock Route
   List<LatLng> _generateMockRoute(LatLng start, LatLng end) {
-    const int count = 30;
+    const int count = 100;
     List<LatLng> points = [];
 
     for (int i = 0; i <= count; i++) {
@@ -184,6 +183,8 @@ class MapService extends ChangeNotifier {
 
       riderLocation = routePoints[_riderIndex];
       _riderIndex++;
+      print(riderLocation);
+      print(_riderIndex);
 
       liveDistance = DistanceCalculator.instance.calculateDistance(
         riderLocation,
@@ -197,7 +198,7 @@ class MapService extends ChangeNotifier {
 
   // 🔄 Update Rider Marker
   void _updateRiderMarker() {
-    markers.removeWhere((m) => m.markerId.value == 'rider');
+    //markers.removeWhere((m) => m.markerId.value == 'rider');
 
     markers.add(
       Marker(

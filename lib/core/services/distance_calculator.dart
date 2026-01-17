@@ -30,10 +30,10 @@ class DistanceCalculator {
   }
 
   String get formattedDistance {
-    if (_liveDistance < 1000) {
+    if (liveDistance < 1000) {
       return 'Rider is at customers door';
     } else {
-      return '${(_liveDistance / 1000).toStringAsFixed(2)} km away';
+      return '${(liveDistance / 1000).toStringAsFixed(2)} km away';
     }
   }
 }
