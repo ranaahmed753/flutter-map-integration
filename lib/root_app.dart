@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:map/screens/polyline_route_screen.dart';
 import 'package:map/screens/rider_tracking_map_screen.dart';
 
 class RootApp extends StatelessWidget {
@@ -12,7 +13,7 @@ class RootApp extends StatelessWidget {
       theme: ThemeData(
           colorScheme: .fromSeed(seedColor: Colors.deepPurple),
     ), // home: RiderTrackingMapScreen(),
-    home: RiderTrackingMapScreen(),
+    home: PolylineRouteScreen(),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:map/core/providers/polyline_route_provider.dart';
 import 'package:map/core/services/map_service.dart';
 import 'package:map/root_app.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -11,6 +12,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => MapService.instance..setupMap()),
+        ChangeNotifierProvider(create: (_) => PolylineRouteProvider()..init()),
       ],
       child: const RootApp(),
     ),
