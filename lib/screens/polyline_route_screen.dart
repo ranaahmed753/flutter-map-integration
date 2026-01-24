@@ -23,6 +23,7 @@ class PolylineRouteScreen extends StatelessWidget {
                 ),
                 myLocationEnabled: false,
                 myLocationButtonEnabled: false,
+                polygons: provider.polygon,
                 polylines: provider.polyline,
                 markers: provider.markers,
                 zoomControlsEnabled: true,

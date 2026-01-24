@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class PolylineRouteProvider extends ChangeNotifier {
   Set<Marker> markers = {};
   Set<Polyline> polyline = {};
+  Set<Polygon> polygon = {};
   LatLng currentLocation = LatLng(23.784178, 90.431136);
   List<LatLng> pointsOnMap = [
     LatLng(23.798827, 90.438391),
@@ -17,6 +18,7 @@ class PolylineRouteProvider extends ChangeNotifier {
   init() {
     initMarkers();
     initPolyline();
+    initPolygon();
     notifyListeners();
   }
 
@@ -43,6 +45,19 @@ class PolylineRouteProvider extends ChangeNotifier {
         color: Colors.blue,
       ),
     };
+  }
+
+  initPolygon() {
+    polygon.add(
+      Polygon(
+        polygonId: PolygonId("polygon_id"),
+        points: pointsOnMap,
+        strokeColor: Colors.blueAccent,
+        strokeWidth: 4,
+        fillColor: Colors.green.withOpacity(0.4),
+        geodesic: true,
+      ),
+    );
   }
 
   onMapCreated(GoogleMapController controller) => mapController = controller;
